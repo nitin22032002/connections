@@ -91,14 +91,35 @@ function GetPath(node1,node2){
       return item.reverse()
     })
   const ShowNetWork=(props)=>{
+    const options = {
+      layout: {
+        hierarchical: false
+      },
+      edges: {
+        color: "#000000"
+      }
+    };
     return(
       <div style={{height:"60%",width:"100%"}}>
+        <div style={{display:"flex",justifyContent:"center",fontSize:20}}>
 
-        <Network>
-      {
-        props.path.map((item)=>{
+        { 
+        props.path.map((item,index)=>{
+          
           return(
-              <Node id={`path${props.index}${item}`} label={`${users[item]}(${item})`}  />
+            <div>
+                {index!==props.path.length-1?`${users[item]} ->`:users[item]}
+              </div>
+            )
+          })
+          
+        }
+        </div>
+        <Network options={options} >
+      { 
+        props.path.map((item,index)=>{
+          return(
+              <Node id={`path${props.index}${item}`} label={`${users[item]}(${index})`}  />
             )
           })
           
@@ -109,7 +130,7 @@ function GetPath(node1,node2){
               return(<></>)
             }
             return(
-                <Edge id={`edge${props.index}${item}${props.path[index-1]}`} label={relations[item][props.path[index-1]]} from={`path${props.index}${item}`} to={`path${props.index}${props.path[index-1]}`}  />
+                <Edge direction={true} id={`edge${props.index}${item}${props.path[index-1]}`} label={relations[props.path[index-1]][item]} to={`path${props.index}${item}`} from={`path${props.index}${props.path[index-1]}`}  />
               )
             })
         }
@@ -120,11 +141,11 @@ function GetPath(node1,node2){
     return(
       <div style={{height:"100%"}}>
       {
-        result.map((item,index)=>{
+        result.length>0?result.map((item,index)=>{
           return(
             <ShowNetWork path={item} index={index} key={index} />
           )
-        })
+        }):<div style={{display:"flex",justifyContent:"center",alignItems:"center",fontSize:30,margin:10,height:"60%"}}>No Relation Found</div>
       }
       </div>
     )

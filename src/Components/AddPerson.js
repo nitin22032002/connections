@@ -60,8 +60,8 @@ export default function AddPerson(props) {
       for(let key in getRel){
           con.push(parseInt(key))
           rel.push(getRel[key].relation)
-          connections[key].push(newNode)
-          relations[key].push(getRel[key].relation)
+          // connections[key].push(newNode)
+          // relations[key].push(getRel[key].relation)
       }
       connections[newNode]=con
       relations[newNode]=rel

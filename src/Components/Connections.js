@@ -23,7 +23,8 @@ function Connections(props) {
                 connections[item].map((node,index1)=>{
                   
                   return( 
-                    parseInt(node)>item || connections[node]===undefined ?<Edge label={relations[item][index1]} id={`e${item}${node}`} from={item} to={node}/>:<></>
+                    // parseInt(node)>item || connections[node]===undefined ?<Edge label={relations[item][index1]} id={`e${item}${node}`} from={item} to={node}/>:<></>
+                   <Edge label={relations[item][index1]} id={`e${item}${node}`} from={item} to={node}/>
                   )
                 })
               )
